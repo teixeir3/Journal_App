@@ -1,4 +1,4 @@
-<h3>Edit <%= post.get("title") %></h3>
+<h3><%= post.isNew() ? "New Post" : post.get("title") %></h3>
 
 <form class="post-form">
   <label>

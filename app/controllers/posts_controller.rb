@@ -12,8 +12,7 @@ class PostsController < ApplicationController
     if @post.save
       render json: @post
     else
-      flash.now[:errors] = @post.errors.full_messages
-      render :index
+      render @post.errors.full_messages
     end
   end
 
@@ -24,15 +23,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    puts "GOT TO UPDATE!!!!"
-    puts params[:id]
     @post = Post.find(params[:id])
 
     if @post.update_attributes(params[:post])
       render json: @post
     else
       flash.now[:errors] = @post.errors.full_messages
-      render :index
+      render @post.errors.full_messages
     end
   end
 end

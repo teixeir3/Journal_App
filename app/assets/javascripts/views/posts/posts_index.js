@@ -12,7 +12,6 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
 
   events: {
     "click button.delete-post": "remove"
-    // "click a.post-link": "showPost"
   },
 
   render: function () {

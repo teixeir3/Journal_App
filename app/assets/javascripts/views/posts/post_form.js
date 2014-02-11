@@ -2,7 +2,6 @@ JournalApp.Views.PostForm = Backbone.View.extend({
 
   template: JST["posts/post_form"],
 
-  // events
   events: {
     "click button.post-form-submit": "submitForm"
   },
@@ -19,15 +18,25 @@ JournalApp.Views.PostForm = Backbone.View.extend({
   submitForm: function (event) {
     event.preventDefault();
     var formData = $("form.post-form").serializeJSON();
-    var postID = this.model.id;
-    this.model.save(formData.post, {
-      success: function() {
-        JournalApp.router.navigate("", { trigger: true });
-      },
-      error: function() {
-        console.log("Post Update Error! ERROR! ERRROEORORO!!!")
-      }
-    })
-    // var post = new Model(id);
+    if (this.model.isNew()) {
+      this.collection.create(formData.post, {
+        wait: true,
+        success: function() {
+          JournalApp.router.navigate("", { trigger: true });
+        },
+        error: function(resp) {
+          alert("Post Create Error! ERROR! ERRROEORORO!!!");
+        }
+      });
+    } else {
+      this.model.save(formData.post, {
+        success: function() {
+          JournalApp.router.navigate("", { trigger: true });
+        },
+        error: function(resp) {
+          alert("Post Update Error! ERROR! ERRROEORORO!!!");
+        }
+      });
+    }
   }
 });
