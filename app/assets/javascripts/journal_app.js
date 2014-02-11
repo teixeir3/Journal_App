@@ -5,7 +5,7 @@ window.JournalApp = {
   Routers: {},
   initialize: function() {
 
-    var collection = new JournalApp.Collections.Posts
+    var collection = new JournalApp.Collections.Posts();
     collection.fetch({
       success:function () {
         var view = new JournalApp.Views.PostsIndex({
@@ -18,22 +18,9 @@ window.JournalApp = {
         console.log("ALERT: YOU'RE SCREWED")
       }
     })
-    // var posts;
-//     $.ajax({
-//       url: "/posts",
-//       type: "GET",
-//       dataType: "json",
-//       success: function (data) {
-//         posts = data;
-//       },
-//       error: function (data) {
-//         console.log("Error with: ")
-//         console.log(data);
-//       }
-//     })
-//     console.log("After ajax: ")
-//     console.log(posts);
 
+    var router = new JournalApp.Routers.Posts($(".content"));
+    Backbone.history.start();
   }
 };
 

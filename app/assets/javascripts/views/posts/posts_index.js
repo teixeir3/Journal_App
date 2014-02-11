@@ -1,10 +1,10 @@
 JournalApp.Views.PostsIndex = Backbone.View.extend({
 
-  intialize: function() {
+  initialize: function() {
     this.listenTo(
       this.collection,
       "remove add change:title reset",
-      this.render
+      this.render.bind(this)
     )
   },
 
@@ -15,7 +15,6 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
   },
 
   render: function () {
-    console.log("IN RENDER BABY");
     var renderedContent = this.template({
       posts: this.collection
     });
@@ -25,13 +24,8 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
   },
 
   remove: function (event) {
-    console.log("In remove!");
     var dataId = $(event.currentTarget).data("id");
-    // console.log(this.collection.get(dataId));
-    console.log(this.collection.remove(dataId));
-    // get post by data-id
-    // delete it
-    // render again?
+    this.collection.get(dataId).destroy(); // Calls Model#remove
   }
 
 });
