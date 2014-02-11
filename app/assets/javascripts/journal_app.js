@@ -5,22 +5,18 @@ window.JournalApp = {
   Routers: {},
   initialize: function() {
 
-    // var collection = new JournalApp.Collections.Posts();
-    // collection.fetch({
-    //   success:function () {
-    //     var view = new JournalApp.Views.PostsIndex({
-    //       collection: collection
-    //     });
-    //
-    //     $(".content").html(view.render().$el);
-    //   },
-    //   error: function () {
-    //     console.log("ALERT: YOU'RE SCREWED")
-    //   }
-    // })
+    var collection = new JournalApp.Collections.Posts()
+    collection.fetch({
+      success: function () {
+        new JournalApp.Routers.Posts($(".content"), collection);
+        Backbone.history.start();
+      },
+      error: function() {
+        console.log("collection fail");
+      }
+    });
 
-    var router = new JournalApp.Routers.Posts($(".content"));
-    Backbone.history.start();
+
   }
 };
 

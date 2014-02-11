@@ -1,47 +1,36 @@
 JournalApp.Routers.Posts = Backbone.Router.extend({
-  initialize: function ($content) {
+  initialize: function ($content, collection) {
     this.$content = $content;
-    console.log($content);
+    this.collection = collection;
   },
 
   routes: {
     "": "index",
+    "posts/:id/edit": "edit",
     "posts/:id": "show"
   },
 
   index: function () {
-    var that = this;
-    var collection = new JournalApp.Collections.Posts();
-    collection.fetch({
-      success: function () {
-        var view = new JournalApp.Views.PostsIndex({
-          collection: collection
-        });
+    var view = new JournalApp.Views.PostsIndex({
+      collection: this.collection
+    });
 
-        that.$content.html(view.render().$el);
-      },
-      error: function () {
-        alert("ALERT: YOU'RE SCREWED");
-      }
-    })
+    this.$content.html(view.render().$el);
   },
 
   show: function (id) {
-    console.log("Router Show function: " + id);
-    var collection = new JournalApp.Collections.Posts();
-    var that = this;
-    collection.fetch({
-      success: function () {
-        var view = new JournalApp.Views.PostShow(
-          { post: collection.get(id) }
-        );
-        that.$content.html(view.render().$el);
-      },
-      error: function() {
-        alert("ERROR! TAYLOR SWIFT KNOWS YOU STALK HER!");
-      }
-    })
+    var view = new JournalApp.Views.PostShow({
+      model: this.collection.get(id)
+    });
 
-    // this.$content.html(view.render().$el);
+    this.$content.html(view.render().$el);
+  },
+
+  edit: function(id) {
+    var view = new JournalApp.Views.PostForm({
+      model: this.collection.get(id)
+    });
+
+    this.$content.html(view.render().$el);
   }
 });
