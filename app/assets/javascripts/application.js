@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.serializeJSON.min
 //= require underscore
 //= require backbone
 //= require journal_app
@@ -21,3 +22,4 @@
 //= require_tree ./views
 //= require_tree ./routers
 //= require_tree .
+//= require_tree

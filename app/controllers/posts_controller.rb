@@ -22,4 +22,17 @@ class PostsController < ApplicationController
     @post.destroy
     render :index
   end
+
+  def update
+    puts "GOT TO UPDATE!!!!"
+    puts params[:id]
+    @post = Post.find(params[:id])
+
+    if @post.update_attributes(params[:post])
+      render json: @post
+    else
+      flash.now[:errors] = @post.errors.full_messages
+      render :index
+    end
+  end
 end
