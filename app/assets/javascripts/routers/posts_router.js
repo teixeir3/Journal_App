@@ -24,7 +24,7 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
       model: this.collection.get(id),
       collection: this.collection
     });
-
+    console.log("IN SHOW");
     this.$content.html(view.render().$el);
   },
 
@@ -41,7 +41,7 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
       model: new JournalApp.Models.Post,
       collection: this.collection
     });
-
+    console.log("IN NEW");
     this.$content.html(view.render().$el);
   }
 });

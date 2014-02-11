@@ -18,6 +18,4 @@
   <button class="post-form-submit">Go!</button>
 </form>
 
-<a href="#/posts/<%= post.id %>">Back to Post</a>
-<br>
-<a href="#">Back to index</a>
+<%= post.isNew() ? "" : "<a href=\"#/posts/" + post.id + "\">Back to Post</a>" %>

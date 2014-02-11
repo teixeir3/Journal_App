@@ -1,17 +1,13 @@
 JournalApp.Views.PostShow = Backbone.View.extend({
 
-  initialize: function() {
-    // this.listenTo(
-    //   this.collection,
-    //   "remove",
-    //   JournalApp.router.new
-    // )
-  },
-
   template: JST['posts/show'],
 
   events: {
-    "click button.delete-post": "remove"
+    "click button.delete-post": "remove",
+    "dblclick .post-title" : "toggleTitle",
+    "dblclick .post-body" : "toggleBody",
+    "blur .edit-post-title" : "savePost",
+    "blur .edit-post-body" : "savePost"
   },
 
   render: function () {
@@ -24,9 +20,36 @@ JournalApp.Views.PostShow = Backbone.View.extend({
   },
 
   remove: function (event) {
+    event.preventDefault();
     var dataId = this.model.id;
-
     this.collection.get(dataId).destroy();
-    JournalApp.router.new();
+
+    JournalApp.router.navigate("posts/new", { trigger: true });
+  },
+
+  toggleTitle: function() {
+    $(".post-title").toggleClass("off");
+    $(".edit-post-title").toggleClass("off");
+  },
+
+  toggleBody: function() {
+    $(".post-body").toggleClass("off");
+    $(".edit-post-body").toggleClass("off");
+  },
+
+  savePost: function(event) {
+    var className = $(event.currentTarget).attr("class");
+    var formData = $(".form-show").serializeJSON();
+    var that = this;
+
+    that.model.save(formData, {
+      success: function () {
+        (className == "edit-post-title") ? that.toggleTitle() : that.toggleBody();
+        JournalApp.router.show(that.model.id);
+      },
+      error: function () {
+        alert("Error updating post");
+      }
+    });
   }
 });

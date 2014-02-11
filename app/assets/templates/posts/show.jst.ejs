@@ -1,6 +1,13 @@
-<h3><%= post.get("title") %></h3>
+<form class="form-show">
 
-<p><%= post.get("body") %></p>
+<h3 class="post-title"><%= post.get("title") %></h3>
+  <input class="edit-post-title off"
+        name="post[title]"
+        value="<%= post.get("title") %>">
+<br>
+
+<p class="post-body"><%= post.get("body") %></p>
+  <textarea class="edit-post-body off" name="post[body]"><%= post.get("body")%></textarea>
 
 <a href="#/posts/<%= post.id %>/edit">Edit this post</a>
 <br><br>
@@ -8,3 +15,5 @@
 <button class="delete-post" data-id="<%= post.id %>">
   Delete
 </button>
+
+</form>
