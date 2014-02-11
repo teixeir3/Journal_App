@@ -18,11 +18,15 @@ JournalApp.Views.PostForm = Backbone.View.extend({
   submitForm: function (event) {
     event.preventDefault();
     var formData = $("form.post-form").serializeJSON();
+    var that = this;
     if (this.model.isNew()) {
       this.collection.create(formData.post, {
         wait: true,
-        success: function() {
-          JournalApp.router.navigate("", { trigger: true });
+        success: function(data) {
+          JournalApp.router.navigate(
+            "#/posts/" + data.id,
+            { trigger: true }
+          );
         },
         error: function(resp) {
           alert("Post Create Error! ERROR! ERRROEORORO!!!");

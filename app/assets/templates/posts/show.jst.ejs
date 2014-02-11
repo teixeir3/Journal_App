@@ -3,6 +3,8 @@
 <p><%= post.get("body") %></p>
 
 <a href="#/posts/<%= post.id %>/edit">Edit this post</a>
-<br>
+<br><br>
 
-<a href="#">Post Index</a>
+<button class="delete-post" data-id="<%= post.id %>">
+  Delete
+</button>

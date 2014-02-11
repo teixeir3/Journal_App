@@ -17,9 +17,21 @@
 }
 
 .content {
-  background-color: gray;
+  float: left;
+  margin-left: 50px;
+  width: 55%;
 }
 
 .sidebar {
-  background-color: green;
+  position: relative;
+  top: 100;
+  border: 5px solid black;
+  border-radius: 2px;
+  width: 30%;
+  float: left;
+}
+
+body {
+  background: #FFFAAA;
+  height: 100%;
 }
