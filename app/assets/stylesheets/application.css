@@ -12,26 +12,32 @@
  *= require_tree .
  */
 
-.sidebar > .button {
-  display: none;
-}
-
-.content {
-  float: left;
-  margin-left: 50px;
-  width: 55%;
-}
-
-.sidebar {
-  position: relative;
-  top: 100;
-  border: 5px solid black;
-  border-radius: 2px;
-  width: 30%;
-  float: left;
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 body {
   background: #FFFAAA;
   height: 100%;
+  font-family: sans-serif;
+  margin-left: 5px;
+}
+
+.content {
+  float: left;
+  margin-left: 300px;
+  width: 55%;
+}
+
+.sidebar {
+  position: fixed;
+  top: 100;
+  border: 5px solid black;
+  border-radius: 2px;
+  width: 280px;
+  float: left;
 }
