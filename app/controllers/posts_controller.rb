@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if @post.save
       render json: @post
     else
-      render @post.errors.full_messages
+      respond_with(@post, :status => :unprocessable_entity)
     end
   end
 
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
       render json: @post
     else
       flash.now[:errors] = @post.errors.full_messages
-      render @post.errors.full_messages
+      respond_with(@post, :status => :unprocessable_entity)
     end
   end
 end
